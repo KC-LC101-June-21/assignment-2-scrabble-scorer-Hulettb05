@@ -38,7 +38,7 @@ function initialPrompt() {
   return word;
 };
 
-let simpleScore = function(word) {
+function simpleScore (word) {
   word = word.toUpperCase();
   let simpleScore = 0;
   for (let a=0; a< word.length; a++) {
@@ -47,7 +47,7 @@ let simpleScore = function(word) {
   return simpleScore;
 }
 
-let vowelBonusScore = function(word) {
+function vowelBonusScore(word) {
   word = word.toUppercase();
   const vowels =['A', 'E', 'I', 'O', 'U']
   let vowelBonusScore = 0;
@@ -58,10 +58,10 @@ let vowelBonusScore = function(word) {
     } else {
       vowelBonusScore =vowelBonusScore += 1;
     }
-  };
+  }
   return vowelBonusScore;
-
-let scrabbleScore = function(word){
+};
+function scrabbleScore (word){
   word = word.toLowerCase();
   let scrabbleScore = 0;
 
@@ -110,19 +110,20 @@ function scorerPrompt(word) {
 }
 
 
-function transform(object) {
-  let newPointStructureObject = {};
-  for (item in object) {
-    for (i = 0; i < object[item].length; i++) {
-      let key = object[item][i];
+
+function transform(oldPointStructure) {
+  let newTrans = {};
+  for (item in oldPointStructure) {
+    for (i = 0; i < oldPointStructure[item].length; i++) {
+      let key = oldPointStructure[item][i];
       key = key.toLowerCase();
-      newPointStructureObject[`${key}`] = Number(item);
+      newTrans[(oldPointStructure[item][i]).toLowerCase()] = Number(item);
     }
   }
-  return newPointStructureObject;
+  return newTrans;
 };
 
-let newPointStructure = trandform(oldPointStructure);
+let newPointStructure = transform(oldPointStructure);
 
 function runProgram() {
   let word = initialPrompt();
